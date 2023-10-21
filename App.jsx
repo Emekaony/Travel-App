@@ -1,12 +1,9 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
+import Home from './src/screens/Home';
 
 const App = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Welcome to RN</Text>
-    </View>
-  );
+  return <Home />;
 };
 
 const styles = StyleSheet.create({
