@@ -15,10 +15,6 @@ const Title = ({text, style}) => {
   );
 };
 
-Title.defaultProps = {
-  text: 'Default Text',
-};
-
 const styles = StyleSheet.create({
   title: {
     fontSize: 32,
