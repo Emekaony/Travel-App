@@ -1,55 +1,50 @@
 import React from 'react';
-import {Pressable, FlatList, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, FlatList, Text, StyleSheet} from 'react-native';
 
 const Categories = ({categories, selectedCategory, onCategoryPress}) => {
-  const renderCategoryItem = ({item}) => {
-    const selected = item === selectedCategory;
-
-    return (
-      <Pressable
-        onPress={() => onCategoryPress(item)}
-        style={[
-          styles.categoryTextContainer,
-          selected ? styles.selectedCategoryTextContainer : {},
-        ]}>
-        <Text
-          style={[
-            styles.categoryText,
-            selected ? styles.selectedCategoryText : {},
-          ]}>
-          {item}
-        </Text>
-      </Pressable>
-    );
-  };
-
   return (
     <FlatList
-      showsHorizontalScrollIndicator={false}
       horizontal
       data={categories}
-      renderItem={({item}) => renderCategoryItem({item})}
+      keyExtractor={item => String(item)}
+      showsHorizontalScrollIndicator={false}
+      renderItem={({item, index}) => {
+        const selected = selectedCategory === item;
+
+        return (
+          <TouchableOpacity
+            onPress={() => onCategoryPress(item)}
+            style={[
+              styles.itemContainer,
+              selected ? styles.selectedItemContainer : {},
+              index === 0 ? {marginLeft: 32} : {},
+            ]}>
+            <Text style={[styles.item, selected ? styles.selectedItem : {}]}>
+              {item}
+            </Text>
+          </TouchableOpacity>
+        );
+      }}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  categoryTextContainer: {
-    marginRight: 17,
-    marginVertical: 14,
-  },
-  selectedCategoryTextContainer: {
-    borderBottomColor: '#4681A3',
-    borderBottomWidth: 2,
-  },
-  categoryText: {
+  item: {
     fontSize: 12,
-    color: 'rgba(0, 0, 0, 0.5)',
-    fontWeight: 'bold',
+    color: 'rgba(0,0,0,0.5)',
     paddingVertical: 2,
   },
-  selectedCategoryText: {
+  selectedItem: {
     color: '#000000',
+  },
+  itemContainer: {
+    marginRight: 17,
+    marginBottom: 14,
+  },
+  selectedItemContainer: {
+    borderBottomColor: '#4681A3',
+    borderBottomWidth: 1,
   },
 });
 

@@ -3,12 +3,12 @@ import {View, StyleSheet, Text, Image, Dimensions} from 'react-native';
 
 const width = Dimensions.get('window').width;
 
-const AttractionCard = ({imageSrc, title, subtitle}) => {
+const AttractionCard = ({imageSrc, title, subtitle, style}) => {
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, style]}>
       <Image style={styles.image} source={{uri: imageSrc}} />
       <Text style={styles.title}>{title}</Text>
-      <View style={styles.subtitleContainer}>
+      <View style={styles.row}>
         <Image style={styles.icon} source={require('../assets/location.png')} />
         <Text style={styles.subtitle}>{subtitle}</Text>
       </View>
@@ -18,16 +18,16 @@ const AttractionCard = ({imageSrc, title, subtitle}) => {
 
 const styles = StyleSheet.create({
   card: {
-    marginRight: 16,
     padding: 4,
     borderWidth: 1,
     borderColor: '#E2E2E2',
     borderRadius: 15,
+    marginBottom: 12,
   },
   image: {
     width: (width - 96) / 2,
-    height: 120,
     borderRadius: 15,
+    height: 120,
   },
   title: {
     fontSize: 12,
@@ -35,21 +35,22 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginLeft: 6,
   },
-  subtitleContainer: {
-    flexDirection: 'row',
-    marginBottom: 12,
-    marginLeft: 6,
-    marginTop: 4,
+  subtitle: {
+    fontSize: 10,
+    fontWeight: '300',
+    color: 'rgba(0,0,0,0.5)',
   },
   icon: {
     width: 10,
     height: 10,
     marginRight: 6,
   },
-  subtitle: {
-    color: 'rgba(0, 0, 0, 0.5)',
-    fontSize: 8,
-    fontWeight: '300',
+  row: {
+    marginBottom: 12,
+    marginLeft: 6,
+    marginTop: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
